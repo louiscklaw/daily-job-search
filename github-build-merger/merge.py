@@ -70,7 +70,7 @@ def git_clone_source(PUSH_URI, TEMP_DIR):
   local('git clone "{}" "{}"'.format(PUSH_URI, TEMP_DIR))
 
 def merge_to_master_branch(branch_to_merge, cwd):
-  checkout_branch('master', cwd)
+  checkout_branch('main', cwd)
   run_command('git merge --ff-only "{}"'.format(branch_to_merge), cwd)
 
 
