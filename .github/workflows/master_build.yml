@@ -3,13 +3,7 @@ on:
   push:
 
 jobs:
-
-
-
-  #
-  # /home/logic/_workspace/daily-job-search/github-build-merger/subjob.yml
-  #
-  test_merger:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -24,9 +18,8 @@ jobs:
         run: |
           yarn
 
-
   merge:
-    needs: [test_merger]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: checkout
