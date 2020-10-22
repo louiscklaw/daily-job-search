@@ -2,7 +2,7 @@ const path = require('path');
 const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
-const {consoleLogWarn, ENV_PRODUCTION} = require('./config')
+const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
 
 const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require('./config');
 
