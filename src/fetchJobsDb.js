@@ -50,9 +50,9 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
   var raw_job_links = test_in_html.match( /href="(\/hk\/en\/job\/.+?)"/g ).sort();
   var job_link_and_jobid = raw_job_links.map( x => {
     var job_link = x.replace( 'href="', 'https://hk.jobsdb.com' ).replace( '"', '' )
-    var job_id = x.match( /jobId=(\d+)/ )[ 1 ]
-
     var job_screencapture_filename = `jobs_sc_${getFilenameByJobLink(job_link)}.png`
+
+    var job_id = x.match( /jobId=(\d+)/ )[ 1 ]
 
     return {
       job_link,
