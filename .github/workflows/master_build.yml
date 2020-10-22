@@ -70,6 +70,32 @@ jobs:
             cd ..
           cd ..
 
+      # the maximum time for this run is top most 10 min for free a/c
+      - name: run test1
+        timeout-minutes: 30
+        env: # Or as an environment variable
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+        run: |
+          git config --global user.email "louiscklaw@github.com"
+          git config --global user.name "louiscklaw"
+          cd main
+            yarn
+            node src/index.js
+            cd ignored_screen_capture
+              git add .
+              git commit -m"update ignore screen capture," | true
+              git push |true
+            cd ..
+            cd appliation_letter_queue
+              git add .
+              git commit -m"update application letter queue," | true
+              git push | true
+            cd ..
+          cd ..
+
   merge:
     needs: [test, build]
     runs-on: ubuntu-latest

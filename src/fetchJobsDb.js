@@ -82,7 +82,8 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
 
   } )
 
-  for ( i = 0; i < job_link_and_jobid.length; i++ ) {
+  for ( i = 0; i < 10; i++ ) {
+  // for ( i = 0; i < job_link_and_jobid.length; i++ ) {
     var active_job_link = job_link_and_jobid[ i ]
 
     // console.log(`capture job ${active_job_link.job_link}`)
