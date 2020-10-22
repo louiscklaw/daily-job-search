@@ -11,6 +11,6 @@ set -ex
 # mv /home/logic/_workspace/jobs_search_tryout/ignore/jobs_sc_assistant-it-officer-100003008017229.png /home/logic/_workspace/jobs_search_tryout/screencapture/ | true
 
 
-rm -rf screencapture/*.*
+# rm -rf screencapture/*.*
 
 node src/index.js

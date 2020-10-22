@@ -18,6 +18,7 @@ const {movePngToIgnore} = require('./movePngToIgnore')
 
 async function setupNewApplicationLetter(){
   var png_filenames = fs.readdirSync(NEW_SC_PATH)
+    .filter(x => x.search(/.+?.png/) > -1)
 
   try {
     png_filenames.map(x => (async () => {
