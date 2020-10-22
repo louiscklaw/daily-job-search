@@ -19,7 +19,9 @@ jobs:
           node -v
           yarn -v
           yarn
-          node tests/test_pngjs_helloworld.js
+          cd tests
+            node test_pngjs_helloworld.js
+          cd ..
 
   build:
     runs-on: ubuntu-latest
