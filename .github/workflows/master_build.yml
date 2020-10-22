@@ -11,9 +11,9 @@ jobs:
 
       - name: checkout
         uses: actions/checkout@v2
-          with:
-            ref: ignored_screen_capture
-            path: 'ignored_screen_capture'
+        with:
+          ref: ignored_screen_capture
+          path: 'ignored_screen_capture'
 
       - name: run test
         env: # Or as an environment variable
