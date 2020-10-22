@@ -18,6 +18,7 @@ const {getJobsdbConfig} = require('./getSettings');
     console.log('done')
   } catch (e) {
     consoleLogError(e.message)
+    process.exit(-1)
   }
 
 })();
