@@ -6,20 +6,28 @@ const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require
 
 const {getFilenameByJobLink} = require('./getFilenameByJobLink')
 
-async function fetchJobsDb(jobsdb_fetch_config){
-  const categories = Object.keys(jobsdb_fetch_config)
-  const CATEGORIES_LEN = categories.length;
+async function fetchJobsDb( jobsdb_fetch_config ) {
+  try {
+    const categories = Object.keys( jobsdb_fetch_config )
+    const CATEGORIES_LEN = categories.length;
 
-  for(i=0;i<CATEGORIES_LEN;i++){
-    var category = categories[i]
-    var keywords = jobsdb_fetch_config[category]
-    var keywords_len = keywords.length
+    for ( i = 0; i < CATEGORIES_LEN; i++ ) {
+      var category = categories[ i ]
+      var keywords = jobsdb_fetch_config[ category ]
+      var keywords_len = keywords.length
 
-    for (ii=0;ii<keywords_len;ii++){
-      var keyword = keywords[ii]
+      for ( ii = 0; ii < keywords_len; ii++ ) {
+        var keyword = keywords[ ii ]
+        await fetchJobsDbByCategoryAndKeywords( category, keyword )
+      }
+    }
+  } catch ( error ) {
+    consoleLogError( error.message )
 
-      await fetchJobsDbByCategoryAndKeywords(category,keyword)
-
+    if ( ENV_PRODUCTION ) {
+      process.exit( -1 )
+    } else {
+      throw error
     }
   }
 }
