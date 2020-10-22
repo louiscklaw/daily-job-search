@@ -17,6 +17,8 @@ jobs:
 
         run: |
           yarn
+          node src/index.js
+
 
   merge:
     needs: [build]
