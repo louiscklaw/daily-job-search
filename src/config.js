@@ -20,7 +20,7 @@ const debug_channel = '_debug';
 const production_channel = 'jobs_alert';
 
 // production means building on ci for cron job
-const ENV_PRODUCTION=process.env.CI
+const ENV_PRODUCTION=process.env.CI;
 const conversationId=ENV_PRODUCTION ? production_channel : debug_channel;
 // const conversationId = '_debug';
 
