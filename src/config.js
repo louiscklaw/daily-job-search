@@ -7,12 +7,18 @@ const SRC_HOME= __dirname;
 const PROJ_HOME = path.resolve(`${__dirname}/..`);
 
 const screencapture_path = `${PROJ_HOME}/screencapture`;
+
+// ignored screencapture path
+// local test
 const ignore_sc_path = `${PROJ_HOME}/ignore`;
+const gh_ignore_sc_path = `${PROJ_HOME}/ignored_screen_capture`;
+const IGNORE_SC_PATH = ENV_PRODUCTION? gh_ignore_sc_path:ignore_sc_path;
+
 const APPLICATION_LETTER_TEMPLATE_PATH = `${SRC_HOME}/application_letter_template`;
 const APPLICATION_LETTER_QUEUE_PATH=`${PROJ_HOME}/appliation_letter_queue`
 
 const new_job_sc_path = screencapture_path;
-const IGNORE_SC_PATH = ignore_sc_path
+
 const NEW_SC_PATH= new_job_sc_path
 
 // the channel name to post to

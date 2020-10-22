@@ -26,4 +26,10 @@ node tests/test_fetchJobsDb.js
 cd tests
   node test_pngjs_helloworld.js
 cd ..
+
+
+cd /tmp
+  rm -rf ignored_screen_capture | true
+  git clone git@github.com:louiscklaw/daily-job-search.git -b ignored_screen_capture ignored_screen_capture
+cd ..
 # node src/index.js

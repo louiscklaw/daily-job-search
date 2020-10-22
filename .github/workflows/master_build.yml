@@ -9,6 +9,12 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: checkout
+        uses: actions/checkout@v2
+          with:
+            ref: ignored_screen_capture
+            path: 'ignored_screen_capture'
+
       - name: run test
         env: # Or as an environment variable
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
@@ -16,6 +22,7 @@ jobs:
           MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
         run: |
+          ls -l ignore_screen_capure
           node -v
           yarn -v
           yarn
