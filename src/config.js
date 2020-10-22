@@ -15,6 +15,10 @@ const local_test_ignore_sc_path = `${PROJ_HOME}/ignore`;
 const gh_ignore_sc_path = `${PROJ_HOME}/ignored_screen_capture`;
 const IGNORE_SC_PATH = gh_ignore_sc_path;
 
+console.log(IGNORE_SC_PATH)
+process.exit(-1)
+
+
 const APPLICATION_LETTER_TEMPLATE_PATH = `${SRC_HOME}/application_letter_template`;
 const APPLICATION_LETTER_QUEUE_PATH=`${PROJ_HOME}/appliation_letter_queue`
 
