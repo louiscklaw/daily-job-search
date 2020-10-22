@@ -5,8 +5,8 @@ fetch_settings:
       - automation
       - automated
       - testing automation
-      # - raspberry
-      # - software testing
+      - raspberry
+      - software testing
       # - quality assurance
 
     # for testing
