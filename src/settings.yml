@@ -4,10 +4,10 @@ fetch_settings:
       - qa
       - automation
       - automated
-      # - testing automation
-      # - raspberry
-      # - software testing
-      # - quality assurance
+      - testing automation
+      - raspberry
+      - software testing
+      - quality assurance
 
     # for testing
     test_category:
