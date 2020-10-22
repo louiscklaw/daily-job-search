@@ -23,7 +23,7 @@ jobs:
 
         run: |
           pwd
-          ls -l ignore_screen_capure
+          ls -l ../ignore_screen_capure
           node -v
           yarn -v
           yarn
