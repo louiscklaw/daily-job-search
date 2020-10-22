@@ -11,9 +11,9 @@ const screencapture_path = `${PROJ_HOME}/screencapture`;
 
 // ignored screencapture path
 // local test
-const ignore_sc_path = `${PROJ_HOME}/ignore`;
+const local_test_ignore_sc_path = `${PROJ_HOME}/ignore`;
 const gh_ignore_sc_path = `${PROJ_HOME}/ignored_screen_capture`;
-const IGNORE_SC_PATH = ENV_PRODUCTION? gh_ignore_sc_path:ignore_sc_path;
+const IGNORE_SC_PATH = gh_ignore_sc_path;
 
 const APPLICATION_LETTER_TEMPLATE_PATH = `${SRC_HOME}/application_letter_template`;
 const APPLICATION_LETTER_QUEUE_PATH=`${PROJ_HOME}/appliation_letter_queue`
@@ -51,7 +51,6 @@ if (conversationId==debug_channel){
 module.exports={
   PROJ_HOME,
   screencapture_path,
-  ignore_sc_path,
   new_job_sc_path,
   IGNORE_SC_PATH,
   NEW_SC_PATH,
