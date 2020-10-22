@@ -3,6 +3,22 @@ on:
   push:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: run test
+        env: # Or as an environment variable
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+        run: |
+          yarn
+          node tests/test_pngjs_helloworld.js
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +37,7 @@ jobs:
 
 
   merge:
-    needs: [build]
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:
       - name: checkout
