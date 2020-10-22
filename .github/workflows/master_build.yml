@@ -16,6 +16,8 @@ jobs:
           MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
         run: |
+          node -v
+          yarn -v
           yarn
           node tests/test_pngjs_helloworld.js
 
