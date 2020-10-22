@@ -19,7 +19,9 @@ const NEW_SC_PATH= new_job_sc_path
 const debug_channel = '_debug';
 const production_channel = 'jobs_alert';
 
-const conversationId=process.env.CI ? production_channel : debug_channel;
+// production means building on ci for cron job
+const ENV_PRODUCTION=process.env.CI
+const conversationId=ENV_PRODUCTION ? production_channel : debug_channel;
 // const conversationId = '_debug';
 
 const TODAY = moment();
@@ -55,5 +57,6 @@ module.exports={
   APPLICATION_LETTER_QUEUE_PATH,
 
   TODAY_HK,
-  SETTINGS_FILE_LOC
+  SETTINGS_FILE_LOC,
+  ENV_PRODUCTION
 }

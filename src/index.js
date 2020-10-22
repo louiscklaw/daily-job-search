@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {consoleLogError, consoleLogWarn} = require('./config')
+const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
 const {fetchJobsDb} = require('./fetchJobsDb');
 const {pngCompare} = require('./pngCompare');
 const {setupNewApplicationLetter} = require('./setupNewApplicationLetter');
@@ -14,7 +14,12 @@ const {getJobsdbConfig} = require('./getSettings');
     await fetchJobsDb(getJobsdbConfig())
   } catch (error) {
     consoleLogError(error.message)
-    throw error
+
+    if (ENV_PRODUCTION){
+      process.exit(-1)
+    }else{
+      throw error
+    }
   }
 
   try {
