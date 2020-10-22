@@ -2,7 +2,7 @@
 
 const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
 const {fetchJobsDb} = require('./fetchJobsDb');
-const {pngCompare} = require('./pngCompare');
+const {pngCompare, testPngCompare} = require('./pngCompare');
 const {setupNewApplicationLetter} = require('./setupNewApplicationLetter');
 
 const {getJobsdbConfig} = require('./getSettings');
@@ -12,7 +12,7 @@ const {getJobsdbConfig} = require('./getSettings');
   try {
 
     await fetchJobsDb(getJobsdbConfig())
-
+    // await testPngCompare()
     await pngCompare()
 
   } catch (error) {
@@ -26,15 +26,15 @@ const {getJobsdbConfig} = require('./getSettings');
     }
   }
 
-  try {
+  // try {
 
 
-    await setupNewApplicationLetter()
+  //   await setupNewApplicationLetter()
 
-    console.log('done')
-  } catch (e) {
-    consoleLogError(e.message)
-    throw e
-  }
+  //   console.log('done')
+  // } catch (e) {
+  //   consoleLogError(e.message)
+  //   throw e
+  // }
 
 })();

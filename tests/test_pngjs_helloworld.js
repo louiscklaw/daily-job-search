@@ -1,8 +1,15 @@
 #!/usr/bin/env node
 
-var fs = require( "fs" ),
-  PNG = require( "pngjs" ).PNG;
+const fs = require('fs');
+const PNG = require( 'pngjs' ).PNG;
 
-var temp_png = PNG.sync.read(
-  fs.readFileSync( 'helloworld.png' )
-)
+async function pngCompare(){
+  var temp_png = PNG.sync.read(
+    fs.readFileSync( 'helloworld.png' )
+  )
+}
+
+(async () => {
+
+  await pngCompare()
+})()

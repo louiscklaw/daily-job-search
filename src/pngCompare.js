@@ -10,10 +10,31 @@ const {sendSlackMessage} = require('./sendSlackMessage');
 const {getJobsDbJobLink} = require('./getJobsDbJobLink')
 const {getJobLinkByFilename} = require('./getJobLinkByFilename')
 
-async function pngCompare(){
-  var new_sc_PNG_path = fs.readdirSync(NEW_SC_PATH).map(x => `${NEW_SC_PATH}/${x}`);
+// async function testPngCompare(){
+//   var ignore_PNG_filenames = fs.readdirSync(IGNORE_SC_PATH)
+//     .filter(x => x.search(/.+.png$/) > -1)
+//     .map(x => `${IGNORE_SC_PATH}/${x}`);
 
-  var ignore_PNG_filenames = fs.readdirSync(IGNORE_SC_PATH).map(x => `${IGNORE_SC_PATH}/${x}`);
+//   var ignore_PNGs = ignore_PNG_filenames.map( x => {
+//     var temp_png=PNG.sync.read(
+//       fs.readFileSync(x)
+//     )
+//     return {
+//       filepath: x,
+//       png_data: temp_png
+//     }
+//   })
+
+// }
+
+async function pngCompare(){
+  var new_sc_PNG_filenames = fs.readdirSync(NEW_SC_PATH)
+    .filter(x => x.search(/.+.png$/) > -1)
+    .map(x => `${NEW_SC_PATH}/${x}`);
+
+  var ignore_PNG_filenames = fs.readdirSync(IGNORE_SC_PATH)
+    .filter(x => x.search(/.+.png$/) > -1)
+    .map(x => `${IGNORE_SC_PATH}/${x}`);
 
   var ignore_PNGs = ignore_PNG_filenames.map( x => {
     var temp_png=PNG.sync.read(
@@ -25,7 +46,7 @@ async function pngCompare(){
     }
   })
 
-  var new_PNGs = new_sc_PNG_path.map( x => {
+  var new_PNGs = new_sc_PNG_filenames.map( x => {
     var temp_png = PNG.sync.read(
       fs.readFileSync(x)
     )
@@ -87,5 +108,6 @@ async function pngCompare(){
 
 
 module.exports={
-  pngCompare
+  pngCompare,
+  testPngCompare
 }
