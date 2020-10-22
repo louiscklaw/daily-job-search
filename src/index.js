@@ -19,6 +19,7 @@ const {getJobsdbConfig} = require('./getSettings');
     consoleLogError(error.message)
 
     if (ENV_PRODUCTION){
+      throw error
       process.exit(-1)
     }else{
       throw error
