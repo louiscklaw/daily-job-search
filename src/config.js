@@ -2,6 +2,7 @@ const path = require('path');
 const chalk = require('chalk');
 const moment = require('moment-timezone');
 
+const ENV_PRODUCTION=process.env.CI;
 
 const SRC_HOME= __dirname;
 const PROJ_HOME = path.resolve(`${__dirname}/..`);
@@ -26,7 +27,7 @@ const debug_channel = '_debug';
 const production_channel = 'jobs_alert';
 
 // production means building on ci for cron job
-const ENV_PRODUCTION=process.env.CI;
+
 const conversationId=ENV_PRODUCTION ? production_channel : debug_channel;
 // const conversationId = '_debug';
 
