@@ -22,5 +22,8 @@ node tests/test_updateApplicationLetter.js
 node tests/test_getSettings.js
 
 node tests/test_fetchJobsDb.js
-node tests/test_pngjs_helloworld.js
+
+cd tests
+  node test_pngjs_helloworld.js
+cd ..
 # node src/index.js
