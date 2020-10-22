@@ -50,7 +50,7 @@ jobs:
             cd ignored_screen_capture
               git config --global user.email "louiscklaw@github.com"
               git config --global user.name "louiscklaw"
-              git add *.png
+              git add .
               git commit -m"updaet ignore screen capture,"
               git push
             cd ..
