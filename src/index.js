@@ -27,10 +27,6 @@ const {getJobsdbConfig} = require('./getSettings');
   }
 
   // try {
-
-
-
-
   //   console.log('done')
   // } catch (e) {
   //   consoleLogError(e.message)
