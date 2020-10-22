@@ -109,5 +109,5 @@ async function pngCompare(){
 
 module.exports={
   pngCompare,
-  testPngCompare
+  // testPngCompare
 }
