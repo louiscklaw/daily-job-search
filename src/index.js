@@ -10,7 +10,14 @@ const {getJobsdbConfig} = require('./getSettings');
 (async () => {
 
   try {
+    throw new Error('helloerror')
     await fetchJobsDb(getJobsdbConfig())
+  } catch (error) {
+    consoleLogError(error.message)
+    throw error
+  }
+
+  try {
 
     await pngCompare()
     await setupNewApplicationLetter()
