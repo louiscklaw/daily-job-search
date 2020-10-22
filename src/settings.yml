@@ -3,8 +3,8 @@ fetch_settings:
     information-technology:
       - qa
       - automation
-      # - automated
-      # - testing automation
+      - automated
+      - testing automation
       # - raspberry
       # - software testing
       # - quality assurance
