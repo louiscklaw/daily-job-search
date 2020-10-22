@@ -47,7 +47,7 @@ jobs:
           cd main
             yarn
             node src/index.js
-            cd ignore_screen_capture
+            cd ignored_screen_capture
               git config --global user.email "louiscklaw@github.com"
               git config --global user.name "louiscklaw"
               git add *.png
