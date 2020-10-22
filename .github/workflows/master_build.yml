@@ -9,11 +9,11 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      timeout-minutes: 30
       - name: checkout
         uses: actions/checkout@v2
 
       - name: run test
+        timeout-minutes: 30
         env: # Or as an environment variable
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
