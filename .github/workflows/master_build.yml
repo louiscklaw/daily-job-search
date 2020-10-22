@@ -55,13 +55,13 @@ jobs:
             node src/index.js
             cd ignored_screen_capture
               git add .
-              git commit -m"update ignore screen capture,"
-              git push
+              git commit -m"update ignore screen capture," | true
+              git push |true
             cd ..
             cd appliation_letter_queue
               git add .
-              git commit -m"update application letter queue,"
-              git push
+              git commit -m"update application letter queue," | true
+              git push | true
             cd ..
           cd ..
 
