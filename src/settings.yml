@@ -2,7 +2,7 @@ fetch_settings:
   jobsdb:
     information-technology:
       - qa
-      # - automation
+      - automation
       # - automated
       # - testing automation
       # - raspberry
