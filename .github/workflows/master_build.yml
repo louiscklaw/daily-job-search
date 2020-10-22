@@ -34,8 +34,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
+
+      - uses: actions/checkout@v2
+        with:
+          ref: main
+          path: 'main'
+
+      - uses: actions/checkout@v2
+        with:
+          ref: ignored_screen_capture
+          path: 'main/ignored_screen_capture'
 
       - name: run test
         env: # Or as an environment variable
@@ -44,8 +52,9 @@ jobs:
           MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
         run: |
-          yarn
-          node src/index.js
+          cd main
+            yarn
+            node src/index.js
 
 
   merge:
