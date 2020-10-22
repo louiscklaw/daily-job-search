@@ -44,7 +44,8 @@ jobs:
           ref: appliation_letter_queue
           path: 'main/appliation_letter_queue'
 
-      - name: run test
+      # the maximum time for this run is top most 10 min for free a/c
+      - name: run test2
         timeout-minutes: 30
         env: # Or as an environment variable
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
