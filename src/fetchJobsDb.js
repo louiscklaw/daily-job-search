@@ -2,6 +2,8 @@ const path = require('path');
 const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
+const {consoleLogWarn, ENV_PRODUCTION} = require('./config')
+
 const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require('./config');
 
 const {getFilenameByJobLink} = require('./getFilenameByJobLink')
@@ -9,18 +11,26 @@ const {getFilenameByJobLink} = require('./getFilenameByJobLink')
 async function fetchJobsDb( jobsdb_fetch_config ) {
   try {
     const categories = Object.keys( jobsdb_fetch_config )
-    const CATEGORIES_LEN = categories.length;
 
-    for ( i = 0; i < CATEGORIES_LEN; i++ ) {
-      var category = categories[ i ]
-      var keywords = jobsdb_fetch_config[ category ]
-      var keywords_len = keywords.length
+      const CATEGORIES_LEN = categories.length;
 
-      for ( ii = 0; ii < keywords_len; ii++ ) {
-        var keyword = keywords[ ii ]
-        await fetchJobsDbByCategoryAndKeywords( category, keyword )
+      for ( i = 0; i < CATEGORIES_LEN; i++ ) {
+        var category = categories[ i ]
+        var keywords = jobsdb_fetch_config[ category ]
+        var keywords_len = keywords.length
+
+        for ( ii = 0; ii < keywords_len; ii++ ) {
+          var keyword = keywords[ ii ]
+          if (category == 'self-test'){
+            // test call handle separately
+            return keyword
+          }else{
+            await fetchJobsDbByCategoryAndKeywords( category, keyword )
+          }
+        }
       }
-    }
+
+
   } catch ( error ) {
     consoleLogError( error.message )
 
