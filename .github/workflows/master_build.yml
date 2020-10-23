@@ -73,6 +73,11 @@ jobs:
               git commit -m"update application letter queue," | true
               git push | true
             cd ..
+            cd db
+              git add .
+              git commit -m"update db," | true
+              git push | true
+            cd ..
           cd ..
 
   merge:
