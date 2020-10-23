@@ -3,7 +3,7 @@ const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
 const {ERROR_FETCH_ERROR} = requrie('./errors')
-const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
+const {consoleLogError, consoleLogWarn, ENV_PRODUCTION, FETCH_RETRY_COUNT} = require('./config')
 
 const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require('./config');
 
@@ -100,13 +100,17 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
 
   var retry_countdown = FETCH_RETRY_COUNT;
   while (retry_countdown > 0){
-    retry_countdown = retry_countdown - 1;
     try {
+      if (retry_countdown != FETCH_RETRY_COUNT){
+        consoleLogWarn('retrying fetch page')
+
+      }
       await browser.close();
     } catch (error) {
-
+      retry_countdown = retry_countdown - 1;
     }
   }
+
 
 }
 
