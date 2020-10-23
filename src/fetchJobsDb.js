@@ -98,7 +98,12 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
 
   }
 
-  await browser.close();
+
+  try {
+    await browser.close();
+  } catch (error) {
+
+  }
 
 }
 
