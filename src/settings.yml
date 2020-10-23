@@ -3,11 +3,13 @@ fetch_settings:
     information-technology:
       - qa
       - software testing
-      # - automation
-      # - automated
-      # - testing automation
-      # - raspberry
-      # - quality assurance
+      - software test
+      - uat
+      - automation
+      - automated
+      - testing automation
+      - raspberry
+      - quality assurance
 
     # for testing
     test_category:
