@@ -13,4 +13,4 @@ set -ex
 
 # rm -rf screencapture/*.*
 
-node src/index.js
+node src/index.js information-technology qa
