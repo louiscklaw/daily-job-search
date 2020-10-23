@@ -44,8 +44,6 @@ async function fetchJobsDb( jobsdb_fetch_config ) {
 }
 
 async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
-
-
   var retry_countdown = FETCH_RETRY_COUNT;
   while (retry_countdown >= 0){
     try {
