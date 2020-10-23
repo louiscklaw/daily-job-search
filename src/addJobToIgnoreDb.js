@@ -2,6 +2,7 @@ const fs = require('fs')
 
 const { EXIT_UPDATE_IGNORE_DATABASE } = require('./errors')
 const { IGNORED_DB_PATH, ENV_PRODUCTION } = require('./config')
+const { cosnoleLogHighlight } = require('./util')
 
 function writeDb(db_file, data_in){
   return fs.writeFileSync(db_file,data_in,{encoding:'utf-8'})
@@ -25,8 +26,10 @@ function getSortedUnique(a_in){
 
 async function addJobToIgnoreDb(job_to_add){
   try {
+    cosnoleLogHighlight('adding job to ignore db ', job_to_add)
     var temp = await readIgnoredJobDb()
     temp = getSortedUnique([...temp, job_to_add])
+
     await writeIgnoredJobDb(temp)
 
     return
