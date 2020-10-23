@@ -99,10 +99,10 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
   }
 
   var retry_countdown = FETCH_RETRY_COUNT;
-  while (retry_countdown > 0){
+  while (retry_countdown >= 0){
     try {
       if (retry_countdown != FETCH_RETRY_COUNT){
-        consoleLogWarn('retrying fetch page')
+        consoleLogWarn(`retrying fetch page, remaining ${retry_countdown}`)
 
       }
       await browser.close();
