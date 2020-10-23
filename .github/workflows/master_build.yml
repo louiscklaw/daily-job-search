@@ -44,9 +44,14 @@ jobs:
           ref: appliation_letter_queue
           path: 'main/appliation_letter_queue'
 
+      - uses: actions/checkout@v2
+        with:
+          ref: db
+          path: 'main/db'
+
           # the maximum time for this run is top most 10 min for free a/c
       - name: run test1
-        timeout-minutes: 30
+
         env: # Or as an environment variable
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
