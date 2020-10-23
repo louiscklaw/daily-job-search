@@ -2,7 +2,7 @@ fetch_settings:
   jobsdb:
     information-technology:
       - qa
-      - software testing
+      # - software testing
       # - automation
       # - automated
       # - testing automation

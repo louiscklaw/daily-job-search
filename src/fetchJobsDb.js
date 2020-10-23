@@ -46,6 +46,7 @@ async function fetchJobsDb( jobsdb_fetch_config ) {
 async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
   var retry_countdown = FETCH_RETRY_COUNT;
   var fetch_done = false;
+
   while (!fetch_done && retry_countdown >= 0 ){
     try {
       if (retry_countdown != FETCH_RETRY_COUNT){
@@ -70,10 +71,14 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
       fs.writeFileSync( `jobs_${keywords}_list.html`, page_content, {
         encoding: 'utf-8'
       } )
-      console.log( page_content.search( /href/g ) )
+      var herf_found =  page_content.search( /href/g )
+      var num_of_href_found = herf_found.length
+      console.log( `${num_of_href_found} number of href found` )
 
       var test_in_html = page_content
       var raw_job_links = test_in_html.match( /href="(\/hk\/en\/job\/.+?)"/g ).sort();
+      var num_of_job_links_found = raw_job_links.length
+      console.log(`${num_of_job_links_found} number of job links found`)
 
       // get one link only when testing
       var job_links_to_fetch = ENV_PRODUCTION ? raw_job_links: [raw_job_links[0],raw_job_links[1]]
@@ -92,27 +97,23 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
 
       } )
 
+      for ( i = 0; i < job_link_and_jobid.length; i++ ) {
 
-      for ( i = 0; i < 10; i++ ) {
-        // for ( i = 0; i < job_link_and_jobid.length; i++ ) {
-          var active_job_link = job_link_and_jobid[ i ]
-
-          // console.log(`capture job ${active_job_link.job_link}`)
-          console.log( `saving screencapture ${active_job_link.job_screencapture_filename}` )
-
-          await page.goto( active_job_link.job_link )
-
-          await page.screenshot( {
-            path: `${screencapture_path}/${active_job_link.job_screencapture_filename}`
-          } );
-
-        }
+        var active_job_link = job_link_and_jobid[ i ]
+        // console.log(`capture job ${active_job_link.job_link}`)
+        await page.goto( active_job_link.job_link )
+        await page.screenshot( {
+          path: `${screencapture_path}/${active_job_link.job_screencapture_filename}`
+        } );
+      }
 
       await browser.close();
 
+      console.log('fetch done')
       fetch_done= true
 
     } catch (error) {
+      console.log(error.message)
       retry_countdown = retry_countdown - 1;
     }
   }

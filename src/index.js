@@ -6,6 +6,8 @@ const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
 const {fetchJobsDb} = require('./fetchJobsDb');
 const {pngCompare, testPngCompare} = require('./pngCompare');
 const {setupNewApplicationLetter} = require('./setupNewApplicationLetter');
+const {addJobToIgnoreDb} = require('./addJobToIgnoreDb')
+const {checkIfNewJobs} = require('./checkIfNewJobs')
 
 const {getJobsdbConfig} = require('./getSettings');
 
@@ -14,8 +16,12 @@ const {getJobsdbConfig} = require('./getSettings');
   try {
 
     await fetchJobsDb(getJobsdbConfig())
+    await checkIfNewJobs()
+
+    // TODO: remove
     // await pngCompare()
-    // await setupNewApplicationLetter()
+
+    await setupNewApplicationLetter()
 
   } catch (error) {
     consoleLogError(error.message)

@@ -17,6 +17,9 @@ const IGNORE_SC_PATH = gh_ignore_sc_path;
 const APPLICATION_LETTER_TEMPLATE_PATH = `${SRC_HOME}/application_letter_template`;
 const APPLICATION_LETTER_QUEUE_PATH=`${PROJ_HOME}/appliation_letter_queue`
 
+const DB_PATH = `${PROJ_HOME}/db`
+const IGNORED_DB_PATH=`${DB_PATH}/ignored_job.json`
+
 const new_job_sc_path = screencapture_path;
 
 const NEW_SC_PATH= new_job_sc_path
@@ -66,5 +69,7 @@ module.exports={
   TODAY_HK,
   SETTINGS_FILE_LOC,
   ENV_PRODUCTION,
-  FETCH_RETRY_COUNT
+  FETCH_RETRY_COUNT,
+  DB_PATH,
+  IGNORED_DB_PATH
 }
