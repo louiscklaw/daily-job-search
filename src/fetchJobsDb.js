@@ -2,7 +2,7 @@ const path = require('path');
 const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
-const {ERROR_FETCH_ERROR} = requrie('./errors')
+const {ERROR_FETCH_ERROR} = require('./errors')
 const {consoleLogError, consoleLogWarn, ENV_PRODUCTION, FETCH_RETRY_COUNT} = require('./config')
 
 const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require('./config');
