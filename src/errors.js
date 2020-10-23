@@ -1,6 +1,8 @@
+const ERROR_RUN_ERROR=-1
 const ERROR_FETCH_ERROR=-2
 
 
 module.exports={
-  ERROR_FETCH_ERROR
+  ERROR_FETCH_ERROR,
+  ERROR_RUN_ERROR
 }

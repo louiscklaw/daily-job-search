@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
+const { ERROR_RUN_ERROR } = require('./errors')
 const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
+
 const {fetchJobsDb} = require('./fetchJobsDb');
 const {pngCompare, testPngCompare} = require('./pngCompare');
 const {setupNewApplicationLetter} = require('./setupNewApplicationLetter');
@@ -20,7 +22,7 @@ const {getJobsdbConfig} = require('./getSettings');
 
     if (ENV_PRODUCTION){
       throw error
-      process.exit(-1)
+      process.exit( ERROR_RUN_ERROR )
     }else{
       throw error
     }
