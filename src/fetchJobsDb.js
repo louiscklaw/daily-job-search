@@ -2,6 +2,7 @@ const path = require('path');
 const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
+const {ERROR_FETCH_ERROR} = requrie('./errors')
 const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
 
 const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require('./config');
@@ -35,7 +36,7 @@ async function fetchJobsDb( jobsdb_fetch_config ) {
     consoleLogError( error.message )
 
     if ( ENV_PRODUCTION ) {
-      process.exit( -1 )
+      process.exit( ERROR_FETCH_ERROR )
     } else {
       throw error
     }
