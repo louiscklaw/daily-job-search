@@ -98,11 +98,14 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
 
   }
 
+  var retry_countdown = FETCH_RETRY_COUNT;
+  while (retry_countdown > 0){
+    retry_countdown = retry_countdown - 1;
+    try {
+      await browser.close();
+    } catch (error) {
 
-  try {
-    await browser.close();
-  } catch (error) {
-
+    }
   }
 
 }

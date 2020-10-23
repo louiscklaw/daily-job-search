@@ -47,6 +47,8 @@ if (conversationId==debug_channel){
   consoleLogWarn('will post to slack debug channel');
 }
 
+const FETCH_RETRY_COUNT=5;
+
 module.exports={
   PROJ_HOME,
   screencapture_path,
@@ -63,5 +65,6 @@ module.exports={
 
   TODAY_HK,
   SETTINGS_FILE_LOC,
-  ENV_PRODUCTION
+  ENV_PRODUCTION,
+  FETCH_RETRY_COUNT
 }
