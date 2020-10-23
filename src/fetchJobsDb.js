@@ -44,24 +44,6 @@ async function fetchJobsDb( jobsdb_fetch_config ) {
 }
 
 async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
-  console.log( `getting list using ${category}, ${keywords}` )
-  const browser = await puppeteer.launch( {
-    defaultViewport: {
-      width: 1920 / 2,
-      height: 5080
-    },
-    ignoreHTTPSErrors: true
-  } );
-  const page = await browser.newPage();
-
-  await page.goto( `https://hk.jobsdb.com/hk/jobs/${category}/1?Key=${keywords}` );
-  await page.screenshot( { path: `jobsdb_${keywords}.png` } );
-
-  var page_content = await page.content()
-  fs.writeFileSync( `jobs_${keywords}_list.html`, page_content, {
-    encoding: 'utf-8'
-  } )
-  console.log( page_content.search( /href/g ) )
 
 
   var retry_countdown = FETCH_RETRY_COUNT;
@@ -71,6 +53,25 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
         consoleLogWarn(`retrying fetch page, remaining ${retry_countdown}`)
 
       }
+
+      console.log( `getting list using ${category}, ${keywords}` )
+      const browser = await puppeteer.launch( {
+        defaultViewport: {
+          width: 1920 / 2,
+          height: 5080
+        },
+        ignoreHTTPSErrors: true
+      } );
+      const page = await browser.newPage();
+
+      await page.goto( `https://hk.jobsdb.com/hk/jobs/${category}/1?Key=${keywords}` );
+      await page.screenshot( { path: `jobsdb_${keywords}.png` } );
+
+      var page_content = await page.content()
+      fs.writeFileSync( `jobs_${keywords}_list.html`, page_content, {
+        encoding: 'utf-8'
+      } )
+      console.log( page_content.search( /href/g ) )
 
       var test_in_html = page_content
       var raw_job_links = test_in_html.match( /href="(\/hk\/en\/job\/.+?)"/g ).sort();
