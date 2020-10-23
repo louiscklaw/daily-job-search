@@ -63,26 +63,6 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
   } )
   console.log( page_content.search( /href/g ) )
 
-  var test_in_html = page_content
-  var raw_job_links = test_in_html.match( /href="(\/hk\/en\/job\/.+?)"/g ).sort();
-
-  // get one link only when testing
-  var job_links_to_fetch = ENV_PRODUCTION ? raw_job_links: [raw_job_links[0],raw_job_links[1]]
-
-  var job_link_and_jobid = job_links_to_fetch.map( x => {
-    var job_link = x.replace( 'href="', 'https://hk.jobsdb.com' ).replace( '"', '' )
-    var job_screencapture_filename = `jobs_sc_${getFilenameByJobLink(job_link)}.png`
-
-    var job_id = x.match( /jobId=(\d+)/ )[ 1 ]
-
-    return {
-      job_link,
-      job_id,
-      job_screencapture_filename
-    }
-
-  } )
-
 
   var retry_countdown = FETCH_RETRY_COUNT;
   while (retry_countdown >= 0){
@@ -91,6 +71,26 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
         consoleLogWarn(`retrying fetch page, remaining ${retry_countdown}`)
 
       }
+
+      var test_in_html = page_content
+      var raw_job_links = test_in_html.match( /href="(\/hk\/en\/job\/.+?)"/g ).sort();
+
+      // get one link only when testing
+      var job_links_to_fetch = ENV_PRODUCTION ? raw_job_links: [raw_job_links[0],raw_job_links[1]]
+
+      var job_link_and_jobid = job_links_to_fetch.map( x => {
+        var job_link = x.replace( 'href="', 'https://hk.jobsdb.com' ).replace( '"', '' )
+        var job_screencapture_filename = `jobs_sc_${getFilenameByJobLink(job_link)}.png`
+
+        var job_id = x.match( /jobId=(\d+)/ )[ 1 ]
+
+        return {
+          job_link,
+          job_id,
+          job_screencapture_filename
+        }
+
+      } )
 
 
       for ( i = 0; i < 10; i++ ) {
