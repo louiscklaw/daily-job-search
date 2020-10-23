@@ -83,20 +83,6 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
 
   } )
 
-  for ( i = 0; i < 10; i++ ) {
-  // for ( i = 0; i < job_link_and_jobid.length; i++ ) {
-    var active_job_link = job_link_and_jobid[ i ]
-
-    // console.log(`capture job ${active_job_link.job_link}`)
-    console.log( `saving screencapture ${active_job_link.job_screencapture_filename}` )
-
-    await page.goto( active_job_link.job_link )
-
-    await page.screenshot( {
-      path: `${screencapture_path}/${active_job_link.job_screencapture_filename}`
-    } );
-
-  }
 
   var retry_countdown = FETCH_RETRY_COUNT;
   while (retry_countdown >= 0){
@@ -105,6 +91,24 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
         consoleLogWarn(`retrying fetch page, remaining ${retry_countdown}`)
 
       }
+
+
+      for ( i = 0; i < 10; i++ ) {
+        // for ( i = 0; i < job_link_and_jobid.length; i++ ) {
+          var active_job_link = job_link_and_jobid[ i ]
+
+          // console.log(`capture job ${active_job_link.job_link}`)
+          console.log( `saving screencapture ${active_job_link.job_screencapture_filename}` )
+
+          await page.goto( active_job_link.job_link )
+
+          await page.screenshot( {
+            path: `${screencapture_path}/${active_job_link.job_screencapture_filename}`
+          } );
+
+        }
+
+
       await browser.close();
     } catch (error) {
       retry_countdown = retry_countdown - 1;
