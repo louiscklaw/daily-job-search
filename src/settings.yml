@@ -10,6 +10,8 @@ fetch_settings:
       - testing automation
       - raspberry
       - quality assurance
+      - software tester
+      - uat tester
 
     # for testing
     test_category:
