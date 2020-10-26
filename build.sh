@@ -14,3 +14,6 @@ set -ex
 # rm -rf screencapture/*.*
 
 node src/index.js information-technology qa
+
+rm -rf *.html
+rm -rf *.png
