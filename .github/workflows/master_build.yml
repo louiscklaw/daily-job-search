@@ -6,7 +6,6 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -41,8 +40,8 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          ref: appliation_letter_queue
-          path: 'main/appliation_letter_queue'
+          ref: application_letter_queue
+          path: 'main/application_letter_queue'
 
       - uses: actions/checkout@v2
         with:
@@ -68,7 +67,7 @@ jobs:
               git commit -m"update ignore screen capture," | true
               git push |true
             cd ..
-            cd appliation_letter_queue
+            cd application_letter_queue
               git add .
               git commit -m"update application letter queue," | true
               git push | true

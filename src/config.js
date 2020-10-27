@@ -15,7 +15,8 @@ const gh_ignore_sc_path = `${PROJ_HOME}/ignored_screen_capture`;
 const IGNORE_SC_PATH = gh_ignore_sc_path;
 
 const APPLICATION_LETTER_TEMPLATE_PATH = `${SRC_HOME}/application_letter_template`;
-const APPLICATION_LETTER_QUEUE_PATH=`${PROJ_HOME}/appliation_letter_queue`
+const APPLICATION_LETTER_QUEUE_PATH=`${PROJ_HOME}/application_letter_queue`
+const CTGOODJOBS_APPLICATION_LETTER_TEMPLATE_PATH=`${PROJ_HOME}/src/lib/ctgoodjobs/application_letter_template`
 
 const DB_PATH = `${PROJ_HOME}/db`
 const IGNORED_DB_PATH=`${DB_PATH}/ignored_job.json`
@@ -66,6 +67,7 @@ module.exports={
 
   APPLICATION_LETTER_TEMPLATE_PATH,
   APPLICATION_LETTER_QUEUE_PATH,
+  CTGOODJOBS_APPLICATION_LETTER_TEMPLATE_PATH,
 
   TODAY_HK,
   SETTINGS_FILE_LOC,

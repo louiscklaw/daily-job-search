@@ -10,8 +10,8 @@ set -ex
 # rm -rf ignore/*.png &
 wait
 
-rm -rf appliation_letter_queue
-mkdir -p appliation_letter_queue
+rm -rf application_letter_queue
+mkdir -p application_letter_queue
 
 # testing email
 cp src/application_letter_template/email.md tests/email.md

@@ -35,16 +35,27 @@ async function fetchCtgoodjobs( address_to_fetch ) {
     var joblinks_length = joblinks.length
     console.log(`${joblinks_length} fetched ...`)
 
+
+    // scrape job detail page start
+    const job_detail_browser = await puppeteer.launch( {
+      defaultViewport: {
+        width: 960,
+        height: 1080*2
+      },
+      ignoreHTTPSErrors: true,
+      // headless: false
+    } );
+    const job_detail_page = await job_detail_browser.newPage();
+
     for (i=0;i<joblinks_length;i++){
       var joblink = joblinks[i]
-      console.log(`scraping ${joblink} ...`)
 
-      await page.goto(joblink)
-      await page.screenshot( {
-        path: `${screencapture_path}/${getPathnamebyJobLink(joblink)}.png`
-      } );
-
+      await job_detail_page.goto(joblink)
+      await job_detail_page.screenshot( { path: `${screencapture_path}/${getPathnamebyJobLink(joblink)}.png` } );
+      break
     }
+    await job_detail_browser.close();
+    // scrape job detail page done
 
     await browser.close();
 

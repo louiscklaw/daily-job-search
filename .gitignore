@@ -1,5 +1,6 @@
 # ignore directory by orphan branch
 **/appliation_letter_queue
+**/application_letter_queue
 **/ignored_screen_capture
 **/db
 **/screencapture
