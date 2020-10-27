@@ -29,12 +29,10 @@ async function fetchCtgoodjobs( address_to_fetch ) {
     var page_content = await page.content()
     // fs.writeFileSync('./ctgoodjobs_index.html',page_content,{encoding:'utf-8'})
 
-
     // console.log(page_content)
     var joblinks = grepCtgoodjobsJobLink(page_content)
     var joblinks_length = joblinks.length
     console.log(`${joblinks_length} fetched ...`)
-
 
     // scrape job detail page start
     const job_detail_browser = await puppeteer.launch( {
@@ -52,7 +50,7 @@ async function fetchCtgoodjobs( address_to_fetch ) {
 
       await job_detail_page.goto(joblink)
       await job_detail_page.screenshot( { path: `${screencapture_path}/${getPathnamebyJobLink(joblink)}.png` } );
-      break
+
     }
     await job_detail_browser.close();
     // scrape job detail page done

@@ -10,6 +10,17 @@ fetch_settings:
       - testing automation
       - raspberry
       - quality assurance
+  ctgoodjobs:
+    all-information-technology:
+      - qa
+      - software testing
+      - software test
+      - uat
+      - automation
+      - automated
+      - testing automation
+      - raspberry
+      - quality assurance
 
     # for testing
     test_category:
