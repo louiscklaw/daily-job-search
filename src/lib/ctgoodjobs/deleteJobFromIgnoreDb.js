@@ -2,7 +2,6 @@ const fs = require('fs')
 
 const { EXIT_UPDATE_IGNORE_DATABASE } = require('../errors')
 const { IGNORED_CTGOODJOBS_DB_PATH, ENV_PRODUCTION } = require('../../config')
-const { cosnoleLogHighlight } = require('../../util')
 
 function writeDb(db_file, data_in){
   return fs.writeFileSync(db_file,data_in,{encoding:'utf-8'})
@@ -24,12 +23,10 @@ function getSortedUnique(a_in){
   return a_in.reduce( (a,x) => a.includes(x)? a: [...a, x], [] ).sort()
 }
 
-async function addJobToIgnoreDb(job_to_add){
+async function deleteJobFromIgnoreDb(job_to_delete){
   try {
-    cosnoleLogHighlight('adding job to ignore db ', job_to_add)
     var temp = await readIgnoredJobDb()
-    temp = getSortedUnique([...temp, job_to_add])
-
+    temp = temp.filter(x => x != job_to_delete)
     await writeIgnoredJobDb(temp)
 
     return
@@ -39,13 +36,8 @@ async function addJobToIgnoreDb(job_to_add){
   }
 }
 
-function helloworld_addJobToIgnoreDb(){
-  console.log(`helloworld_addJobToIgnoreDb`)
-}
-
 module.exports={
-  addJobToIgnoreDb,
+  deleteJobFromIgnoreDb,
   getSortedUnique,
-  readIgnoredJobDb,
-  helloworld_addJobToIgnoreDb
+  readIgnoredJobDb
 }

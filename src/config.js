@@ -19,6 +19,7 @@ const APPLICATION_LETTER_QUEUE_PATH=`${PROJ_HOME}/appliation_letter_queue`
 
 const DB_PATH = `${PROJ_HOME}/db`
 const IGNORED_DB_PATH=`${DB_PATH}/ignored_job.json`
+const IGNORED_CTGOODJOBS_DB_PATH=`${DB_PATH}/ignored_ctgoodjobs.json`
 
 const new_job_sc_path = screencapture_path;
 
@@ -71,5 +72,6 @@ module.exports={
   ENV_PRODUCTION,
   FETCH_RETRY_COUNT,
   DB_PATH,
-  IGNORED_DB_PATH
+  IGNORED_DB_PATH,
+  IGNORED_CTGOODJOBS_DB_PATH
 }
