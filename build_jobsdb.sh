@@ -12,8 +12,8 @@ set -ex
 
 
 # rm -rf screencapture/*.*
-./build_jobsdb.sh
-./build_ctgoodjobs.sh
+
+node src/index.js information-technology qa
 
 rm -rf *.html
 rm -rf *.png

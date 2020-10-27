@@ -24,6 +24,7 @@
     "chalk": "^4.1.0",
     "fs-extra": "^9.0.1",
     "moment-timezone": "^0.5.31",
+    "nodemon": "^2.0.6",
     "pixelmatch": "^5.2.1",
     "png-crop": "^0.0.2",
     "pngjs": "^5.0.0",
