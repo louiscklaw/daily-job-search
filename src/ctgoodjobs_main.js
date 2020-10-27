@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 
+const {consoleLogError} = require('./config');
+
 const {fetchCtgoodjobs} = require('./lib/fetch_ctgoodjobs');
 const {checkIfNewJobs} = require('./lib/ctgoodjobs/checkIfNewJobs');
 const {setupNewApplicationLetter} = require('./lib/ctgoodjobs/setupNewApplicationLetter');
 const { ENV_PRODUCTION } = require( './config' );
 
+const {getCtgoodjobsConfig} = require('./getSettings');
+
 (async () => {
   try {
-    await fetchCtgoodjobs()
-    await checkIfNewJobs()
-    await setupNewApplicationLetter()
+    await fetchCtgoodjobs(getCtgoodjobsConfig())
+    // await checkIfNewJobs()
+    // await setupNewApplicationLetter()
 
     console.log('done')
 

@@ -18,7 +18,12 @@ function getJobsdbConfig(){
   return getSettings().jobsdb
 }
 
+function getCtgoodjobsConfig(){
+  return getSettings().ctgoodjobs
+}
+
 module.exports={
   getSettings,
-  getJobsdbConfig
+  getJobsdbConfig,
+  getCtgoodjobsConfig
 }

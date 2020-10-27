@@ -5,6 +5,8 @@
 **/db
 **/screencapture
 
+*.png
+
 # Logs
 logs
 *.log

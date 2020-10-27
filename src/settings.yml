@@ -1,28 +1,31 @@
 fetch_settings:
   jobsdb:
     information-technology:
-      - qa
-      - software testing
-      - software test
-      - uat
-      - automation
       - automated
-      - testing automation
-      - raspberry
+      - automation
+      - qa
       - quality assurance
+      - raspberry
+      - software test
+      - software testing
+      - testing automation
+      - uat
+
   ctgoodjobs:
     all-information-technology:
-      - qa
-      - software testing
-      - software test
-      - uat
-      - automation
       - automated
-      - testing automation
-      - raspberry
-      - quality assurance
+      - automation
+      - qa
+      # - quality assurance
 
-    # for testing
+      # - raspberry
+      # - software test
+      # - software testing
+      # - testing automation
+      # - uat
+
+  # for testing
+  test_site:
     test_category:
       - test_keyword1
       - test_keyword2

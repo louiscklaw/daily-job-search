@@ -4,9 +4,16 @@ const {getCtgoodjobJobDetailLink} = require('./getCtgoodjobJobDetailLink')
 
 
 function grepCtgoodjobsJobLink(page_content){
-  return page_content.match(/href="\/job.+?"/g)
-    .map(x => parseCtgoodjobsLink(x) )
-    .map(x => getCtgoodjobJobDetailLink(x.position, x.id))
+  if (page_content != null){
+    var links = page_content.match(/href="\/job.+?"/g)
+    return links
+      .map(x => parseCtgoodjobsLink(x) )
+      .map(x => getCtgoodjobJobDetailLink(x.position, x.id))
+
+  }else{
+    return []
+
+  }
 }
 
 function helloworld_grepCtgoodjobsJobLink(){
