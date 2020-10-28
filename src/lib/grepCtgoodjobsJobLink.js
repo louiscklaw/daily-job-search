@@ -2,7 +2,6 @@ const { parse } = require( 'yaml' )
 const {parseCtgoodjobsLink} = require('./parseCtgoodjobsLink')
 const {getCtgoodjobJobDetailLink} = require('./getCtgoodjobJobDetailLink')
 
-
 function grepCtgoodjobsJobLink(page_content){
   if (page_content != null){
     var links = page_content.match(/href="\/job.+?"/g)

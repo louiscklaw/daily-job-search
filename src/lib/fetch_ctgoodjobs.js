@@ -7,6 +7,7 @@ const {screencapture_path, consoleLogError, consoleLogWarn} = require('../config
 const {grepCtgoodjobsJobLink} = require('./grepCtgoodjobsJobLink')
 const  {getPathnamebyJobLink} = require('./ctgoodjobs/getPathnamebyJobLink')
 const {lookupJobArea} = require('./ctgoodjobs/lookupJobArea')
+const {checkPossibleLinksFound} = require('./checkPossibleLinksFound')
 
 const MAIN_PAGE_HTML_TEMP = './ctgoodjobs_index.html'
 
@@ -32,36 +33,58 @@ async function fetchCtgoodjobs( config_in ) {
       var keyword = keywords[ii]
       var keyword_in_url = keyword.replace(' ','%20')
 
-      try {
-        const browser = await puppeteer.launch( {
-          defaultViewport: {
-            width: 960,
-            height: 10800
-          },
-          ignoreHTTPSErrors: true,
-          // headless: false
-        } );
-        const page = await browser.newPage();
+      const browser = await puppeteer.launch( {
+        defaultViewport: {
+          width: 960,
+          height: 10800
+        },
+        ignoreHTTPSErrors: true,
+        // headless: false
+      } );
 
-        var site_address = `https://www.ctgoodjobs.hk/ctjob/listing/joblist.asp?keywordForQuickSearch=${keyword_in_url}&job_area=${area_id}`
-        await page.goto( site_address );
-        await page.screenshot( { path: `ctgoodjobs.png` } );
+      var retry = true
+      var count = 0
+      var max_count = 3
 
-        var page_content = await page.content()
-        // fs.writeFileSync('./ctgoodjobs_index.html',page_content,{encoding:'utf-8'})
+      while (retry && count < max_count){
+        try {
 
-        // console.log(page_content)
-        var joblinks = grepCtgoodjobsJobLink(page_content)
-        var joblinks_length = joblinks.length
-        all_joblinks = [...joblinks, ...all_joblinks]
+          const page = await browser.newPage();
 
-        console.log(`fetching "${keyword}", ${joblinks_length} fetched ...`)
+          var site_address = `https://www.ctgoodjobs.hk/ctjob/listing/joblist.asp?keywordForQuickSearch=${keyword_in_url}&job_area=${area_id}`
+          await page.goto( site_address );
+          await page.screenshot( { path: `ctgoodjobs.png` } );
 
-        await browser.close();
+          var page_content = await page.content()
+          // fs.writeFileSync('./ctgoodjobs_index.html',page_content,{encoding:'utf-8'})
 
-      } catch (error) {
-        throw error
+          if (checkPossibleLinksFound(page_content)){
+            // clear exit
+
+            var joblinks = grepCtgoodjobsJobLink(page_content)
+            var joblinks_length = joblinks.length
+            all_joblinks = [...joblinks, ...all_joblinks]
+
+            console.log(`fetching "${keyword}", ${joblinks_length} fetched ...`)
+
+            retry = false
+
+          }else{
+            // dirty exit
+            consoleLogWarn(`cannot fetch link from result page link: ${site_address}`)
+            count = count + 1
+          }
+
+
+        } catch (error) {
+          consoleLogError(`error found during fetching link ${site_address}`)
+          throw error
+        }
+
       }
+
+      await browser.close();
+
     }
   }
 
