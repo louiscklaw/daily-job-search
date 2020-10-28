@@ -3,7 +3,7 @@ const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
 const {ERROR_FETCH_ERROR} = require('./errors')
-const {screencapture_path, consoleLogError} = require('../config')
+const {screencapture_path, consoleLogError, consoleLogWarn} = require('../config')
 const {grepCtgoodjobsJobLink} = require('./grepCtgoodjobsJobLink')
 const  {getPathnamebyJobLink} = require('./ctgoodjobs/getPathnamebyJobLink')
 const {lookupJobArea} = require('./ctgoodjobs/lookupJobArea')
