@@ -14,14 +14,14 @@ fetch_settings:
   ctgoodjobs:
     all-information-technology:
       - qa
-      # - automated
-      # - automation
-      # - quality assurance
-      # - raspberry
-      # - software test
-      # - software testing
-      # - testing automation
-      # - uat
+      - automated
+      - automation
+      - quality assurance
+      - raspberry
+      - software test
+      - software testing
+      - testing automation
+      - uat
 
   # for testing
   test_site:

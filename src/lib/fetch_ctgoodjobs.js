@@ -10,9 +10,14 @@ const {lookupJobArea} = require('./ctgoodjobs/lookupJobArea')
 
 const MAIN_PAGE_HTML_TEMP = './ctgoodjobs_index.html'
 
+function getSortedUnique(a_in){
+  return a_in.reduce( (a,x) => a.includes(x)? a: [...a, x], [] ).sort()
+}
+
 async function fetchCtgoodjobs( config_in ) {
   var categories =Object.keys(config_in)
   var categories_length = categories.length
+  var all_joblinks = []
 
   for ( i = 0; i < categories_length; i++ ) {
     var category = categories[i]
@@ -48,38 +53,9 @@ async function fetchCtgoodjobs( config_in ) {
         // console.log(page_content)
         var joblinks = grepCtgoodjobsJobLink(page_content)
         var joblinks_length = joblinks.length
+        all_joblinks = [...joblinks, ...all_joblinks]
+
         console.log(`fetching "${keyword}", ${joblinks_length} fetched ...`)
-
-        // scrape job detail page start
-        const job_detail_browser = await puppeteer.launch( {
-          defaultViewport: {
-            width: 960,
-            height: 1080*2
-          },
-          ignoreHTTPSErrors: true,
-          // headless: false
-        } );
-        const job_detail_page = await job_detail_browser.newPage();
-
-        for (i=0;i<joblinks_length;i++){
-          var joblink = joblinks[i]
-
-          try {
-            console.log(`fetching link: ${joblink}`)
-            await job_detail_page.goto( joblink )
-            await job_detail_page.screenshot( {
-              path: `${screencapture_path}/${getPathnamebyJobLink(joblink)}.png`
-            } );
-
-          } catch ( error ) {
-            consoleLogError(`error during fetching ${joblink}`)
-            consoleLogWarn(`error accepted, skipping ${joblink}`)
-            throw error
-          }
-
-        }
-        await job_detail_browser.close();
-        // scrape job detail page done
 
         await browser.close();
 
@@ -87,8 +63,44 @@ async function fetchCtgoodjobs( config_in ) {
         throw error
       }
     }
-
   }
+
+
+  // scrape job detail page start
+  const job_detail_browser = await puppeteer.launch( {
+    defaultViewport: {
+      width: 960,
+      height: 1080*2
+    },
+    ignoreHTTPSErrors: true,
+    // headless: false
+  } );
+
+  const job_detail_page = await job_detail_browser.newPage();
+
+  var uniq_all_joblinks = getSortedUnique(all_joblinks)
+  console.log(`total job links fetched ${uniq_all_joblinks.length}`)
+
+  for (j=0; j< uniq_all_joblinks.length;j++){
+    var joblink = uniq_all_joblinks[j]
+    console.log(joblink)
+
+    try {
+      console.log(`fetching link: ${joblink}`)
+      await job_detail_page.goto( joblink )
+      await job_detail_page.screenshot( {
+        path: `${screencapture_path}/${getPathnamebyJobLink(joblink)}.png`
+      } );
+
+    } catch ( error ) {
+      consoleLogError(`error during fetching ${joblink}`)
+      consoleLogWarn(`error accepted, skipping ${joblink}`)
+      throw error
+    }
+  }
+
+  await job_detail_browser.close();
+  // scrape job detail page done
 
 }
 
