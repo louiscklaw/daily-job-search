@@ -72,6 +72,7 @@ async function fetchCtgoodjobs( config_in ) {
 
           } catch ( error ) {
             consoleLogError(`error during fetching ${joblink}`)
+            consoleLogWarn(`error accepted, skipping ${joblink}`)
             throw error
           }
 
