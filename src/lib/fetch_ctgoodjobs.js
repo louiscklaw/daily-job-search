@@ -10,7 +10,6 @@ const {lookupJobArea} = require('./ctgoodjobs/lookupJobArea')
 
 const MAIN_PAGE_HTML_TEMP = './ctgoodjobs_index.html'
 
-
 async function fetchCtgoodjobs( config_in ) {
   var categories =Object.keys(config_in)
   var categories_length = categories.length
@@ -21,8 +20,13 @@ async function fetchCtgoodjobs( config_in ) {
     var keywords_length = keywords.length
     var area_id = lookupJobArea(category)
 
-    for (ii=0; ii<keywords_length;ii++){
+    var max_length = process.argv[2] || 999
+    var keywords_length = Math.min( keywords_length, max_length )
+
+    for ( ii = 0; ii < keywords_length; ii++ ) {
       var keyword = keywords[ii]
+      var keyword_in_url = keyword.replace(' ','%20')
+
       try {
         const browser = await puppeteer.launch( {
           defaultViewport: {
@@ -34,7 +38,7 @@ async function fetchCtgoodjobs( config_in ) {
         } );
         const page = await browser.newPage();
 
-        var site_address = `https://www.ctgoodjobs.hk/ctjob/listing/joblist.asp?keywordForQuickSearch=${keyword}&job_area=${area_id}`
+        var site_address = `https://www.ctgoodjobs.hk/ctjob/listing/joblist.asp?keywordForQuickSearch=${keyword_in_url}&job_area=${area_id}`
         await page.goto( site_address );
         await page.screenshot( { path: `ctgoodjobs.png` } );
 

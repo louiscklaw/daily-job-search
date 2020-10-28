@@ -12,8 +12,8 @@ const {getCtgoodjobsConfig} = require('./getSettings');
 (async () => {
   try {
     await fetchCtgoodjobs(getCtgoodjobsConfig())
-    // await checkIfNewJobs()
-    // await setupNewApplicationLetter()
+    await checkIfNewJobs()
+    await setupNewApplicationLetter()
 
     console.log('done')
 

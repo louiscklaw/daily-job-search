@@ -1,3 +1,5 @@
+const chalk = require('chalk')
+
 function cosnoleLogHighlight(text_input){
   console.log(chalk.green(`${text_input}`))
 }
