@@ -65,6 +65,7 @@ async function fetchCtgoodjobs( config_in ) {
           var joblink = joblinks[i]
 
           try {
+            console.log(`fetching link: ${joblink}`)
             await job_detail_page.goto( joblink )
             await job_detail_page.screenshot( {
               path: `${screencapture_path}/${getPathnamebyJobLink(joblink)}.png`
