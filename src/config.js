@@ -6,6 +6,10 @@ const ENV_PRODUCTION=process.env.CI;
 
 const SRC_HOME= __dirname;
 const PROJ_HOME = path.resolve(`${__dirname}/..`);
+const TEST_HOME = path.resolve(`${PROJ_HOME}/tests`)
+
+const GLASSDOOR_HOME = path.resolve(`${SRC_HOME}/glassdoor`)
+const GLASSDOOR_LIB_HOME = path.resolve(`${GLASSDOOR_HOME}/lib`)
 
 const screencapture_path = `${PROJ_HOME}/screencapture`;
 
@@ -21,6 +25,7 @@ const CTGOODJOBS_APPLICATION_LETTER_TEMPLATE_PATH=`${PROJ_HOME}/src/lib/ctgoodjo
 const DB_PATH = `${PROJ_HOME}/db`
 const IGNORED_DB_PATH=`${DB_PATH}/ignored_job.json`
 const IGNORED_CTGOODJOBS_DB_PATH=`${DB_PATH}/ignored_ctgoodjobs.json`
+const IGNORED_GLASSDOOR_DB_PATH=`${DB_PATH}/ignored_glassdoor.json`
 
 const new_job_sc_path = screencapture_path;
 
@@ -55,7 +60,13 @@ if (conversationId==debug_channel){
 const FETCH_RETRY_COUNT=5;
 
 module.exports={
+  SRC_HOME,
   PROJ_HOME,
+  TEST_HOME,
+
+  GLASSDOOR_HOME,
+  GLASSDOOR_LIB_HOME,
+
   screencapture_path,
   new_job_sc_path,
   IGNORE_SC_PATH,
@@ -75,5 +86,6 @@ module.exports={
   FETCH_RETRY_COUNT,
   DB_PATH,
   IGNORED_DB_PATH,
-  IGNORED_CTGOODJOBS_DB_PATH
+  IGNORED_CTGOODJOBS_DB_PATH,
+  IGNORED_GLASSDOOR_DB_PATH
 }

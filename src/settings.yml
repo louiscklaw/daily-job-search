@@ -18,6 +18,7 @@ fetch_settings:
       - automated
       - automation
       - raspberry
+      - SDLC
       - software test
       - software testing
       - testing automation

@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 function sanitizeFilename(filename_in){
   return filename_in
     .replace(/\//g,'_')
@@ -7,7 +9,11 @@ function sanitizeFilename(filename_in){
 }
 
 function getJobPositionFromContent(page_content){
-  return 'glassdoor_'+sanitizeFilename(page_content.match(/'jobTitle' : "(.+?)"/)[1])
+  try {
+    return 'glassdoor_'+sanitizeFilename(page_content.match(/'jobTitle' : "(.+?)"/)[1])
+  } catch (error) {
+    fs.writeFileSync('./page_content_failed.html', page_content, {encoding:'utf-8'})
+  }
 }
 
 module.exports={

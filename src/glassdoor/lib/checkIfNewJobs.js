@@ -5,6 +5,24 @@ const {readIgnoredJobDb} = require('./addJobToIgnoreDb')
 
 
 function checkIfNewJobs(){
+  var list_new_png = fs.readdirSync(NEW_SC_PATH)
+    .filter(x => x.search(/.+.png$/) > -1)
+    .map(x => `${NEW_SC_PATH}/${x}`);
+
+  var list_ignored_job = readIgnoredJobDb()
+
+  console.log(list_new_png)
+
+  list_new_png.map(x => {
+    name_to_compare = path.basename(x)
+    if (list_ignored_job.includes(name_to_compare)){
+      fs.unlinkSync(x)
+    }else{
+      console.log(name_to_compare)
+    }
+  })
+
+  return
 
 }
 
