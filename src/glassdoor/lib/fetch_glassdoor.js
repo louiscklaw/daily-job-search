@@ -7,7 +7,12 @@ const {GLASSDOOR_LIB_HOME} = require('../../config')
 const {ERROR_FETCH_ERROR} = require('../../errors')
 const {checkPossibleLinksFound} = require(`${GLASSDOOR_LIB_HOME}/checkPossibleLinksFound`)
 const {grepGlassdoorJobLink} = require(`${GLASSDOOR_LIB_HOME}/grepGlassdoorJobLink`)
+
 const {getJobPositionFromContent} = require(`${GLASSDOOR_LIB_HOME}/getJobPositionFromContent`)
+const {getJobIdFromContent}= require('./getJobIdFromContent');
+const {getFilenameFromPageContent} = require( './getFilenameFromPageContent' );
+const {getJobDetailScreenCapture} = require('./getJobDetailScreenCapture')
+
 
 async function fetchGlassdoor(config_in){
 
@@ -54,9 +59,10 @@ async function fetchGlassdoor(config_in){
 
       // const page = await browser.newPage();
       // var page_content = await page.content()
+      var job_detail_content = fs.readFileSync('/home/logic/_workspace/daily-job-search/main/tests/glassdoor/test_glassdoor_jobdetail.html',{encoding:'utf-8'})
 
-      var job_position = getJobPositionFromContent(page_content)
-      console.log(job_position)
+      var test_filename = getFilenameFromPageContent(job_detail_content)
+      var job_detail_png_path = getJobDetailScreenCapture(test_filename)
 
       // await page.goto( site_address );
       // await page.screenshot( { path: `glassdoor.png` } );
