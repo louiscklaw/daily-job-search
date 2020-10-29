@@ -64,9 +64,6 @@ async function fetchGlassdoor(config_in){
 
       await job_detail_page.screenshot( { path: job_detail_png_path } );
 
-      if (i >3){
-        break
-      }
     }
   }
 
