@@ -7,4 +7,6 @@ const { checkIfNewJobs } = require('./lib/checkIfNewJobs');
 const { setupNewApplicationLetter } = require('./lib/setupNewApplicationLetter');
 const { ENV_PRODUCTION } = require( './config' );
 
-const {getGlassdoorConfig} = require('./getSettings');
+const {getGlassdoorConfig} = require('./lib/getSettings');
+
+console.log('helloworld glassdoor')
