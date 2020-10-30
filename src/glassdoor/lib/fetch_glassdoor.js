@@ -71,7 +71,7 @@ async function fetchGlassdoor(config_in){
           await job_detail_page.screenshot( { path: job_detail_png_path } );
           fetch_done=true
         } catch (error) {
-          consoleLogWarn(`fetch failed for address ${site_address}... retry remain${fetch_countdown_remain}`)
+          consoleLogWarn(`fetch failed for address ${site_address}... retry remain ${fetch_countdown_remain}`)
           fetch_countdown_remain --;
         }
 
