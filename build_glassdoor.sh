@@ -16,8 +16,8 @@ set -ex
 rm -rf *.html
 rm -rf *.png
 
-cp \
-  /media/logic/B829-3585/Queue/20201027/ctgoodjobs_test-manager-enterprise_06728272/ctgoodjobs_test-manager-enterprise_06728272.png \
-  /home/logic/_workspace/daily-job-search/main/screencapture/glassdoor_test_123.png
+# cp \
+#   /media/logic/B829-3585/Queue/20201027/ctgoodjobs_test-manager-enterprise_06728272/ctgoodjobs_test-manager-enterprise_06728272.png \
+#   /home/logic/_workspace/daily-job-search/main/screencapture/glassdoor_test_123.png
 
 node src/glassdoor/index.js

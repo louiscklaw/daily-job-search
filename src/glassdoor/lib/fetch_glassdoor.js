@@ -2,7 +2,7 @@ const path = require('path');
 const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
-const {GLASSDOOR_LIB_HOME} = require('../../config')
+const {GLASSDOOR_LIB_HOME, consoleLogWarn} = require('../../config')
 
 const {ERROR_FETCH_ERROR} = require('../../errors')
 const {checkPossibleLinksFound} = require(`${GLASSDOOR_LIB_HOME}/checkPossibleLinksFound`)
@@ -53,16 +53,29 @@ async function fetchGlassdoor(config_in){
     var job_links_length = job_links.length
 
     for(i=0;i<job_links_length;i++){
+
+      var fetch_done = false
+      var fetch_countdown_remain = 3
+
       var site_address = job_links[i]
 
-      var job_detail_page = await job_detail_browser.newPage();
-      await job_detail_page.goto( site_address );
+      while (!fetch_done && fetch_countdown_remain > 0 ){
+        try {
+          var job_detail_page = await job_detail_browser.newPage();
+          await job_detail_page.goto( site_address );
 
-      var job_detail_content = await job_detail_page.content()
-      var test_filename = getFilenameFromPageContent(job_detail_content)
-      var job_detail_png_path = getJobDetailScreenCapture(test_filename)
+          var job_detail_content = await job_detail_page.content()
+          var test_filename = getFilenameFromPageContent(job_detail_content)
+          var job_detail_png_path = getJobDetailScreenCapture(test_filename)
 
-      await job_detail_page.screenshot( { path: job_detail_png_path } );
+          await job_detail_page.screenshot( { path: job_detail_png_path } );
+          fetch_done=true
+        } catch (error) {
+          consoleLogWarn(`fetch failed for address ${site_address}... retry remain${fetch_countdown_remain}`)
+          fetch_countdown_remain --;
+        }
+
+      }
 
     }
   }
