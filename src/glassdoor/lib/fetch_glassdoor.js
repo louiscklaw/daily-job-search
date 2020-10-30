@@ -45,6 +45,7 @@ async function fetchGlassdoor(config_in){
     ignoreHTTPSErrors: true,
     // headless: false
   } );
+  var job_detail_page = await job_detail_browser.newPage();
 
   // var page_content = fs.readFileSync('/home/logic/_workspace/daily-job-search/main/tests/glassdoor/test_glassdoor_index.html',{encoding:'utf-8'})
 
@@ -61,7 +62,7 @@ async function fetchGlassdoor(config_in){
 
       while (!fetch_done && fetch_countdown_remain > 0 ){
         try {
-          var job_detail_page = await job_detail_browser.newPage();
+
           await job_detail_page.goto( site_address );
 
           var job_detail_content = await job_detail_page.content()

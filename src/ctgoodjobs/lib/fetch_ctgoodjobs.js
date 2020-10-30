@@ -85,10 +85,8 @@ async function fetchCtgoodjobs( config_in ) {
 
       await browser.close();
 
-      break
-    }
 
-    break
+    }
 
   }
 
