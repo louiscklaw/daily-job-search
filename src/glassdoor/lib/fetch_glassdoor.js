@@ -55,7 +55,7 @@ async function fetchGlassdoor(config_in){
     for(i=0;i<job_links_length;i++){
 
       var fetch_done = false
-      var fetch_countdown_remain = 3
+      var fetch_countdown_remain = 5
 
       var site_address = job_links[i]
 
@@ -71,7 +71,7 @@ async function fetchGlassdoor(config_in){
           await job_detail_page.screenshot( { path: job_detail_png_path } );
           fetch_done=true
         } catch (error) {
-          consoleLogWarn(`fetch failed for address ${site_address}... retry remain ${fetch_countdown_remain}`)
+          consoleLogWarn(`fetch failed for address ${site_address} ... retry remain ${fetch_countdown_remain}`)
           fetch_countdown_remain --;
         }
 
