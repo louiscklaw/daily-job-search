@@ -13,7 +13,12 @@ set -ex
 
 # rm -rf screencapture/*.*
 
-node src/index.js information-technology qa
 
-rm -rf *.html
-rm -rf *.png
+# node src/index.js information-technology qa
+
+# rm -rf *.html
+# rm -rf *.png
+
+cd /home/logic/_workspace/daily-job-search/main/src
+  node jobsdb/index.js information-technology qa
+cd -

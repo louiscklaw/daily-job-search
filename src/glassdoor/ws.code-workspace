@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "../../tests"
+		},
+		{
+			"path": "../jobsdb"
+		},
+		{
+			"path": "../ctgoodjobs"
 		}
 	],
 	"settings": {}

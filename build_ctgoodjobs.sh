@@ -4,7 +4,11 @@ set -ex
 
 rm -rf /home/logic/_workspace/daily-job-search/main/screencapture/ctgoodjobs*.png
 
-node src/ctgoodjobs_main.js
+cd /home/logic/_workspace/daily-job-search/main/src
+  node ctgoodjobs/ctgoodjobs_main.js
+cd -
+
+# node src/ctgoodjobs_main.js
 
 # echo '' > test_result.out
 # echo 'test result for length 1' >> test_result.out
