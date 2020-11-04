@@ -16,8 +16,11 @@ rm -rf *.html
 rm -rf *.png
 
 # rm -rf screencapture/*.*
-./build_jobsdb.sh
-./build_ctgoodjobs.sh
+# ./build_jobsdb.sh
+./build_ctgoodjobs.sh &
+./build_glassdoor.sh &
+
+wait
 
 rm -rf *.html
 rm -rf *.png
