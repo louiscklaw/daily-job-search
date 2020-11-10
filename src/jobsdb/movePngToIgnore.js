@@ -3,7 +3,7 @@ const fs = require( 'fs-extra' )
 const {
   IGNORE_SC_PATH,
   NEW_SC_PATH
-} = require( './config' );
+} = require( '../config' );
 
 function movePngToIgnore( png_file_to_ignore ) {
   // console.log( png_file_to_ignore )

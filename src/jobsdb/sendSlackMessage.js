@@ -5,7 +5,7 @@ const sharp = require('sharp');
 const PNGCrop = require('png-crop');
 const { WebClient } = require('@slack/web-api');
 
-const {conversationId, TODAY_HK} = require('./config')
+const {conversationId, TODAY_HK} = require('../config')
 
 async function sendSlackMessage(job_screen_capture_path, jobsdb_link){
   const token = process.env.SLACK_TOKEN;

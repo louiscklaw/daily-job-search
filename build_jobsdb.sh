@@ -19,6 +19,9 @@ set -ex
 # rm -rf *.html
 # rm -rf *.png
 
-cd /home/logic/_workspace/daily-job-search/main/src
-  node jobsdb/index.js information-technology qa
-cd -
+# cd /home/logic/_workspace/daily-job-search/main/src
+#   node jobsdb/index.js information-technology qa
+# cd -
+
+# rm -rf jobs*.html jobs*.png
+node src/jobsdb/index.js

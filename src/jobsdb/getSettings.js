@@ -2,7 +2,7 @@ const fs = require('fs')
 const YAML = require('yaml')
 
 const {cosnoleLogHighlight} = require('./util')
-const {SETTINGS_FILE_LOC} = require('./config')
+const {SETTINGS_FILE_LOC} = require('../config')
 
 function getSettings(){
   cosnoleLogHighlight(`using settings from ${SETTINGS_FILE_LOC}`)

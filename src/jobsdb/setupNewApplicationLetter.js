@@ -7,7 +7,7 @@ const {
   NEW_SC_PATH,
   APPLICATION_LETTER_QUEUE_PATH,
   APPLICATION_LETTER_TEMPLATE_PATH
-} = require( './config' );
+} = require( '../config' );
 
 const {getPngHead, getPngHeadHelloworld} = require('./getPngHead');
 const {sendSlackMessage} = require('./sendSlackMessage');

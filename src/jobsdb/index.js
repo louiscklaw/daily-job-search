@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { ERROR_RUN_ERROR } = require('./errors')
-const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('./config')
+const {consoleLogError, consoleLogWarn, ENV_PRODUCTION} = require('../config')
 
 const {fetchJobsDb} = require('./fetchJobsDb');
 const {pngCompare, testPngCompare} = require('./pngCompare');

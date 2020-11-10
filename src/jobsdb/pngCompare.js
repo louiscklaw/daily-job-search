@@ -4,7 +4,7 @@ const pixelmatch = require( 'pixelmatch' );
 const puppeteer = require( 'puppeteer' );
 const child_process=require('child_process');
 
-const {IGNORE_SC_PATH, NEW_SC_PATH} = require('./config');
+const {IGNORE_SC_PATH, NEW_SC_PATH} = require('../config');
 
 const {sendSlackMessage} = require('./sendSlackMessage');
 const {getJobsDbJobLink} = require('./getJobsDbJobLink')

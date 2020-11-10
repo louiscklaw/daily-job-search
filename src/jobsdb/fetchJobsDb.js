@@ -3,11 +3,13 @@ const puppeteer = require( 'puppeteer' );
 const fs = require('fs');
 
 const {ERROR_FETCH_ERROR} = require('./errors')
-const {consoleLogError, consoleLogWarn, ENV_PRODUCTION, FETCH_RETRY_COUNT} = require('./config')
+const {consoleLogError, consoleLogWarn, ENV_PRODUCTION, FETCH_RETRY_COUNT} = require('../config')
 
-const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require('./config');
+const {PROJ_HOME, screencapture_path, ignore_sc_path, new_job_sc_path} = require('../config');
 
-const {getFilenameByJobLink} = require('./getFilenameByJobLink')
+const {getFilenameByJobLink} = require('./getFilenameByJobLink');
+const {checkIfHrefFound} = require( './lib/checkIfHrefFound' );
+const {getJobIdFromLink} = require( './lib/getJobIdFromLink' );
 
 async function fetchJobsDb( jobsdb_fetch_config ) {
   try {
@@ -29,6 +31,7 @@ async function fetchJobsDb( jobsdb_fetch_config ) {
             await fetchJobsDbByCategoryAndKeywords( category, keyword )
           }
         }
+
       }
 
 
@@ -46,48 +49,50 @@ async function fetchJobsDb( jobsdb_fetch_config ) {
 async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
   var retry_countdown = FETCH_RETRY_COUNT;
   var fetch_done = false;
+  var visit_url = `https://hk.jobsdb.com/hk/jobs/${encodeURIComponent(category)}/1?Key=${encodeURIComponent(keywords)}`
+  console.log(visit_url)
+
+  var html_dump_filename = `jobs_${keywords.replace(' ','_')}_list.html`
 
   while (!fetch_done && retry_countdown >= 0 ){
+
     try {
       if (retry_countdown != FETCH_RETRY_COUNT){
         consoleLogWarn(`retrying fetch page, remaining ${retry_countdown}`)
-
       }
+
 
       console.log( `getting list using ${category}, ${keywords}` )
       const browser = await puppeteer.launch( {
         defaultViewport: {
-          width: 1920 / 2,
-          height: 5080
+          width: 960,
+          height: 1080*10
         },
-        ignoreHTTPSErrors: true
+        ignoreHTTPSErrors: true,
+        // headless: false,
+        // slowMo: 100
       } );
-      const page = await browser.newPage();
 
-      await page.goto( `https://hk.jobsdb.com/hk/jobs/${category}/1?Key=${keywords}` );
+      const page = await browser.newPage();
+      await page.goto( visit_url );
       await page.screenshot( { path: `jobsdb_${keywords}.png` } );
 
       var page_content = await page.content()
-      fs.writeFileSync( `jobs_${keywords}_list.html`, page_content, {
+      fs.writeFileSync( html_dump_filename, page_content, {
         encoding: 'utf-8'
       } )
-      var herf_found =  page_content.search( /href/g )
-      var num_of_href_found = herf_found.length
-      console.log( `${num_of_href_found} number of href found` )
 
       var test_in_html = page_content
       var raw_job_links = test_in_html.match( /href="(\/hk\/en\/job\/.+?)"/g ).sort();
       var num_of_job_links_found = raw_job_links.length
       console.log(`${num_of_job_links_found} number of job links found`)
 
-      // get one link only when testing
-      var job_links_to_fetch = ENV_PRODUCTION ? raw_job_links: [raw_job_links[0],raw_job_links[1]]
-
+      var job_links_to_fetch = raw_job_links
       var job_link_and_jobid = job_links_to_fetch.map( x => {
         var job_link = x.replace( 'href="', 'https://hk.jobsdb.com' ).replace( '"', '' )
         var job_screencapture_filename = `jobs_sc_${getFilenameByJobLink(job_link)}.png`
 
-        var job_id = x.match( /jobId=(\d+)/ )[ 1 ]
+        var job_id = getJobIdFromLink(x)
 
         return {
           job_link,
@@ -95,7 +100,7 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
           job_screencapture_filename
         }
 
-      } )
+      })
 
       for ( i = 0; i < job_link_and_jobid.length; i++ ) {
 
@@ -105,19 +110,20 @@ async function fetchJobsDbByCategoryAndKeywords(category,keywords) {
         await page.screenshot( {
           path: `${screencapture_path}/${active_job_link.job_screencapture_filename}`
         } );
+
       }
+
 
       await browser.close();
 
       console.log('fetch done')
       fetch_done= true
-
     } catch (error) {
       console.log(error.message)
       retry_countdown = retry_countdown - 1;
     }
-  }
 
+  }
 
 }
 

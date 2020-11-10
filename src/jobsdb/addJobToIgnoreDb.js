@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const { EXIT_UPDATE_IGNORE_DATABASE } = require('./errors')
-const { IGNORED_DB_PATH, ENV_PRODUCTION } = require('./config')
+const { IGNORED_DB_PATH, ENV_PRODUCTION } = require('../config')
 const { cosnoleLogHighlight } = require('./util')
 
 function writeDb(db_file, data_in){

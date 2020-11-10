@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {consoleLogError} = require('./config');
+const {consoleLogError} = require('../config');
 
 const {fetchCtgoodjobs} = require('./lib/fetch_ctgoodjobs');
 const {checkIfNewJobs} = require('./lib/ctgoodjobs/checkIfNewJobs');
