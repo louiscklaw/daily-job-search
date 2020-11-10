@@ -2,9 +2,17 @@ const fs = require('fs')
 const assert = require('assert')
 const YAML = require('yaml')
 
-const {PROJ_HOME, TEST_DIR, SRC_DIR} = require('./config')
-const {consoleLogWarn, consoleLogError} = require('./util')
-const {getSettings} = require(`${SRC_DIR}/getSettings`)
+const {
+  JOBSDB_SRC_DIR,
+  JOBSDB_LIB_DIR,
+  TEST_DIR,
+  JOBSDB_TEST_SRC_DIR ,
+  JOBSDB_SAMPLE_HTML_DUMP,
+  ENV_PRODUCTION,
+} = require( '../../config' )
+
+const {consoleLogWarn, consoleLogError} = require(`${TEST_DIR}/util`)
+const {getSettings} = require(`${JOBSDB_SRC_DIR}/getSettings`)
 
 function test_getJobsdbConfig(){
   var jobsdb_fetch_settings = test_getSettings().jobsdb
@@ -18,6 +26,9 @@ function test_getJobsdbConfig(){
 }
 
 function test_getSettings(){
+  if (!ENV_PRODUCTION){
+    console.log(`${TEST_DIR}/test.yaml`)
+  }
   var temp = getSettings(`${TEST_DIR}/test.yaml`)
   return temp
 }

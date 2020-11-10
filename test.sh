@@ -12,18 +12,14 @@ export SELF_TEST=1
 # # cp screencapture/jobs_sc_vice-president-group-risk-management-100003008023457.png
 # node tests/test_updateApplicationLetter.js
 
-# # testing getSettings
-# node tests/test_getSettings.js
-
 # node tests/test_fetchJobsDb.js
-
-# node tests/test_addJobToIgnoreDb.js
-# node tests/test_checkIfNewJobs.js
 
 # cd tests
 #   node test_pngjs_helloworld.js
 # cd ..
 
+node tests/ctgoodjobs/index.js
+node tests/glassdoor/index.js
 node tests/jobsdb/index.js
 
 # node src/index.js

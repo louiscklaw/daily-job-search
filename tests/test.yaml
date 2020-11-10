@@ -1,8 +1,5 @@
 fetch_settings:
   jobsdb:
-    information-technology:
-      - qa
-      - automation
     test_category:
       - test_keyword1
       - test_keyword2
